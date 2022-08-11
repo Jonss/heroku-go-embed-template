@@ -1,0 +1,47 @@
+name: deploy
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.18
+
+      - name: Install node setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
+      - name: Install dependencies
+        working-directory: react-app
+        run: |
+          npm install
+
+      - name: Build client
+        working-directory: react-app
+        run: |
+          npm run-script build
+
+      - name: Build binary
+        run: CGO_ENABLED=0 GOOS=linux go build -o app/bin main.go
+
+      - name: Deploy
+        if: success() && github.ref == 'refs/heads/main'
+        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "ares-oswald" #Must be unique in Heroku
+          heroku_email: "joaosantana.ti@gmail.com"
+          usedocker: true
+          dontuseforce: 1

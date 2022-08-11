@@ -19,7 +19,7 @@ func main() {
 
 	fmt.Println("Starting Server")
 	http.HandleFunc("/api/teste", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Olá, go embed!")
+		fmt.Fprintf(w, "Olá, go heroku go embed template!")
 	})
 	http.Handle("/", http.FileServer(getFileSystem()))
 	http.ListenAndServe(":"+port, nil)

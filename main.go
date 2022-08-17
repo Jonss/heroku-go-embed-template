@@ -19,15 +19,15 @@ var cfg config.Config
 
 
 func main() {
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "9000" // Default port if not specified
-	}
-
-var err error
+	var err error
 	cfg, err = config.LoadConfig(".")
 	if err != nil {
 		log.Fatalf("error getting config: error=(%v)", err)
+	}
+
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "9000" // Default port if not specified
 	}
 
 	conn, err := db.NewConnection(cfg.DBURL)
@@ -50,7 +50,7 @@ var err error
 	)
 	srv.Routes()
 
-	fmt.Println("Starting Server...")
+	fmt.Printf("Starting Server... env: [%s].\n", cfg.Env)
 	
 	http.Handle("/", http.FileServer(getFileSystem()))
 	fmt.Println("Server started!")

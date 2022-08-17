@@ -20,3 +20,9 @@ Run the command `make new-project name=PROJECT-NAME-HERE`. This command replaces
 Uncomment the deploy step in .github/workflows/ci.yml and configure `heroku_api_key` and `heroku_app_name`.
 
 ### Set HEROKU_API_KEY and project name [TODO]
+
+On Github, go to setting and set the secrets below:
+
+- HEROKU_API_KEY
+- HEROKU_APP_NAME
+- HEROKU_LOGIN_EMAIL

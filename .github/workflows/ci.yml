@@ -2,12 +2,11 @@ name: deploy
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
     steps:
@@ -24,12 +23,12 @@ jobs:
           node-version: 14.x
 
       - name: Install dependencies
-        working-directory: react-app
+        working-directory: ui
         run: |
           npm install
 
       - name: Build client
-        working-directory: react-app
+        working-directory: ui
         run: |
           npm run-script build
 
@@ -41,7 +40,7 @@ jobs:
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "ares-oswald" #Must be unique in Heroku
-          heroku_email: "joaosantana.ti@gmail.com"
+          heroku_app_name: "" #Must be unique in Heroku
+          heroku_email: ""
           usedocker: true
           dontuseforce: 1

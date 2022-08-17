@@ -1,0 +1,1 @@
+# Heroku Go embed template

@@ -11,6 +11,7 @@ import (
 	"github.com/Jonss/heroku-go-embed-template/pkg/config"
 	"github.com/Jonss/heroku-go-embed-template/pkg/db"
 	"github.com/Jonss/heroku-go-embed-template/pkg/server"
+	"github.com/gorilla/mux"
 )
 
 //go:embed ui/build
@@ -44,7 +45,10 @@ func main() {
 		log.Fatal(err)
 	}
 
+	router := mux.NewRouter()
+
 	srv := server.NewServer(
+		router,
 		cfg,
 		validator,
 	)
@@ -52,9 +56,10 @@ func main() {
 
 	fmt.Printf("Starting Server... env: [%s].\n", cfg.Env)
 	
-	http.Handle("/", http.FileServer(getFileSystem()))
+	router.PathPrefix("/").Handler(http.FileServer(getFileSystem()))
+	// http.Handle("/", )
 	fmt.Println("Server started!")
-	http.ListenAndServe(":"+port, nil)
+	http.ListenAndServe(":"+port, router)
 
 }
 

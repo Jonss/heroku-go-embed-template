@@ -1,5 +1,5 @@
 make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/joaosantana/dev/jonss/heroku-go-embed-template'
-CGO_ENABLED=0 GOOS=linux go build -o app/bin main.go
+grep -ilr 'heroku-go-embed-template' * | xargs -I@ sed -i '' 's/heroku-go-embed-template//g' @
 make: Leaving directory `/Users/joaosantana/dev/jonss/heroku-go-embed-template'
  

@@ -7,6 +7,6 @@ import (
 
 func (s *Server) Hello() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello, world!")
+		fmt.Fprintf(w, "Hello, heroku-go-embed-template!")
 	}
 }

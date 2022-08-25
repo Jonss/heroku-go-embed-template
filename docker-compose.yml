@@ -2,7 +2,7 @@ version: "3.2"
 services:
   db:
     image: postgres:12.3-alpine
-    container_name: heroku-go-embed-template
+    container_name: heroku-go-embed-template-db
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: pass

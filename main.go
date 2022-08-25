@@ -35,7 +35,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	err = db.Migrate(conn, cfg.DBName, cfg.DBMigrationPath)
+	err = db.Migrate(conn, cfg.DBName)
 	if err != nil {
 		log.Fatal(err)
 	}

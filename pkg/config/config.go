@@ -10,7 +10,6 @@ type Config struct {
 	DBDriver        string `mapstructure:"DATABASE_DRIVER"`
 	DBURL           string `mapstructure:"DATABASE_URL"`
 	DBName          string `mapstructure:"DATABASE_NAME"`
-	DBMigrationPath string `mapstructure:"DATABASE_MIGRATION_PATH"`
 }
 
 func LoadConfig(path string) (Config, error) {
